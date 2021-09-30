@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+ body{
+    background-image: url("https://image.freepik.com/free-photo/cement-floor-wall-backgrounds-room-interior-display-products_34552-317.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+ }
+    </style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">MIND</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                </li>
+
+
+
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
+
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-auto">
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Shift</th>
+                        <th scope="col">Language</th>
+                        <th scope="col">Degree</th>
+                        <th scope="col">Available</th>
+                        <th scope="col">Experience</th>
+                        <th scope="col">Fees</th>
+                        <th scope="col">Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for d in doctors %}
+                    <tr>
+                        <td>{{d.name}}</td>
+                        <td>{{d.shift}}</td>
+                        <td>{{d.language}}</td>
+                        <td>{{d.degree}}</td>
+                        <td>{{d.available}} hr</td>
+                        <td>{{d.yoe}}</td>
+                        <td>{{d.fees}}</td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                                data-target="#contact{{d.id}}">Contact</button>
+
+                            <div class="modal fade" id="contact{{d.id}}" tabindex="-1" role="dialog"
+                                aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-md">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label>Dr. Email</label>
+                                                <input type="email" class="form-control" value="{{d.email}}" disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Mobile Number</label>
+                                                <input type="tel" class="form-control" value="{{d.mobile}}" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endblock content %}

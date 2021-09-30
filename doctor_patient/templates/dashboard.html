@@ -1,0 +1,544 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+
+    <div class="text-right">
+        <a href="{% url 'aLogout' %}" class="btn btn-outline-primary mt-5">Logout</a>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-auto">
+            <div class="text-right mb-2">
+                <button type="button" class="btn btn-outline-success" data-toggle="modal"
+                    data-target="#drLogin">+</button>
+            </div>
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Specializaton</th>
+                        <th scope="col">Language</th>
+                        <th scope="col">Shift</th>
+                        <th scope="col">Degree</th>
+                        <th scope="col">Experience</th>
+                        <th scope="col">Fees</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for d in doctors %}
+                    <tr>
+                        <th>{{d.id}}</th>
+                        <td>{{d.name}}</td>
+                        <td>{{d.specialization}}</td>
+                        <td>{{d.language}}</td>
+                        <td>{{d.shift}}</td>
+                        <td>{{d.degree}}</td>
+                        <td>{{d.yoe}}</td>
+                        <td>{{d.fees}}</td>
+                        <td>
+                            <!-- View -->
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                data-target="#drview{{d.id}}">View</button>
+                            <div class="modal fade" id="drview{{d.id}}" tabindex="-1" role="dialog"
+                                aria-labelledby="drForm" aria-hidden="true">
+                                <form action="{% url 'update' d.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header text-center">
+                                                <h4 class="modal-title w-100 font-weight-bold">Doctor Detail</h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body mx-3">
+                                                <div class="container py-2">
+
+                                                    <div class="row">
+                                                        <div class="col col-md-6 pr-5">
+                                                            <h2 class="pb-3">Personal Detail</h2>
+                                                            <div class="form-group">
+                                                                <label>Dr. Name</label>
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="Dr. Name" value="{{d.name}}" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Date Of Birth</label>
+                                                                <input type="date" class="form-control"
+                                                                    placeholder="Date of birth" value="{{d.dob}}"
+                                                                    disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Gender</label>
+                                                                <input type="text" class="form-control"
+                                                                    value="{{d.gender}}" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Dr. Email</label>
+                                                                <input type="email" class="form-control"
+                                                                    value="{{d.email}}" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Mobile Number</label>
+                                                                <input type="tel" class="form-control"
+                                                                    value="{{d.mobile}}" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>State</label>
+                                                                <input type="text" class="form-control"
+                                                                    value="{{d.state}}" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>City</label>
+                                                                <input type="text" class="form-control"
+                                                                    value="{{d.city}}" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Nationality</label>
+                                                                <input type="text" class="form-control"
+                                                                    value="{{d.natioinality}}" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Zipcode</label>
+                                                                <input type="number" class="form-control"
+                                                                    value="{{d.zipcode}}" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Bio:</label>
+                                                                <textarea class="form-control" rows="2"
+                                                                    value="{{d.bio}}" disabled></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col col-md-6 pl-5">
+                                                            <h2 class="pb-3">Working Detail</h2>
+                                                            <div class="form-group">
+                                                                <label>IMC ID</label>
+                                                                <input type="text" class="form-control"
+                                                                    value="{{d.imcid}}" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Reg. Number</label>
+                                                                <input type="text" class="form-control"
+                                                                    value="{{d.regno}}" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Specializaton</label>
+                                                                <input type="text" class="form-control"
+                                                                    value="{{d.specialization}}" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Shift</label>
+                                                                <input type="text" class="form-control"
+                                                                    value="{{d.shift}}" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Degree</label>
+                                                                <input type="text" class="form-control"
+                                                                    value="{{d.degree}}" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Online profile link</label>
+                                                                <input type="text" class="form-control"
+                                                                    value="{{d.online_profile_link}}" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Year of Experience</label>
+                                                                <input type="number" class="form-control"
+                                                                    value="{{d.yoe}}" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Language</label>
+                                                                <input type="text" class="form-control"
+                                                                    value="{{d.language}}" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Available</label>
+                                                                <input type="number" class="form-control"
+                                                                    value="{{d.available}}" disabled>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Fees</label>
+                                                                <input type="number" class="form-control"
+                                                                    value="{{d.fees}}" disabled>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Update -->
+                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                data-target="#drupdate{{d.id}}">Update</button>
+                            <div class="modal fade" id="drupdate{{d.id}}" tabindex="-1" role="dialog"
+                                aria-labelledby="drForm" aria-hidden="true">
+                                <form action="{% url 'update' d.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header text-center">
+                                                <h4 class="modal-title w-100 font-weight-bold">Update Doctor</h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body mx-3">
+                                                <div class="container py-2">
+
+                                                    <div class="row">
+                                                        <div class="col col-md-6 pr-5">
+                                                            <h2 class="pb-3">Personal Detail</h2>
+                                                            <div class="form-group">
+                                                                <label for="uname">Dr. Name</label>
+                                                                <input type="text" name="name" required
+                                                                    class="form-control" id="uname"
+                                                                    placeholder="Dr. Name" value="{{d.name}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="udob">Date Of Birth</label>
+                                                                <input type="date" name="dob" required
+                                                                    class="form-control" id="dob"
+                                                                    placeholder="Date of birth" value="{{d.dob}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="ugender">Gender : </label>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="gender" required value="Male" checked>
+                                                                    <label class="form-check-label"
+                                                                        for="Male">Male</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="gender" value="Female">
+                                                                    <label class="form-check-label"
+                                                                        for="Female">Female</label>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="uemail">Dr. Email</label>
+                                                                <input type="email" name="email" required
+                                                                    class="form-control" id="uemail"
+                                                                    placeholder="Dr. Email" value="{{d.email}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="umobile">Mobile Number</label>
+                                                                <input type="tel" name="mobile" required
+                                                                    class="form-control" id="umobile"
+                                                                    placeholder="Dr. Mobile Number"
+                                                                    value="{{d.mobile}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="state">State</label>
+                                                                <input type="text" name="state" required
+                                                                    class="form-control" id="ustate" placeholder="State"
+                                                                    value="{{d.state}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="city">City</label>
+                                                                <input type="text" name="city" required
+                                                                    class="form-control" id="ucity" placeholder="City"
+                                                                    value="{{d.city}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="unationality">Nationality</label>
+                                                                <input type="text" name="nationality"
+                                                                    class="form-control" id="unationality"
+                                                                    placeholder="Nationality"
+                                                                    value="{{d.natioinality}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="uzipcode">Zipcode</label>
+                                                                <input type="number" name="zipcode" required
+                                                                    class="form-control" id="uzipcode"
+                                                                    placeholder="Zipcode" value="{{d.zipcode}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="ubi">Bio:</label>
+                                                                <textarea class="form-control" name="bio" rows="2"
+                                                                    id="ubio" value="{{d.bio}}"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col col-md-6 pl-5">
+                                                            <h2 class="pb-3">Working Detail</h2>
+                                                            <div class="form-group">
+                                                                <label for="uimcid">IMC ID</label>
+                                                                <input type="text" name="imcid" required
+                                                                    class="form-control" id="uimcid"
+                                                                    placeholder="IMC ID" value="{{d.imcid}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="ureg">Reg. Number</label>
+                                                                <input type="text" name="regno" required
+                                                                    class="form-control" id="ureg"
+                                                                    placeholder="Reg. Number" value="{{d.regno}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="uspecialization">Specializaton</label>
+                                                                <select name="specialization" id="specialization"
+                                                                    required class="form-control"
+                                                                    placeholder="Specializaton" required>
+                                                                    <option value="psychiatrists">Psychiatrists</option>
+                                                                    <option value="psychiatric nurses">Psychiatric
+                                                                        Nurses</option>
+                                                                    <option value="counselors">Counselors</option>
+                                                                    <option value="therapist">Therapist</option>
+                                                                    <option value="psychologists" >Psychologists</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="ushift">Shift</label>
+                                                                <input type="text" name="shift" class="form-control"
+                                                                    id="ushift" placeholder="Shift" value="{{d.shift}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="udegree">Degree</label>
+                                                                <input type="text" name="degree" required
+                                                                    class="form-control" id="udegree"
+                                                                    placeholder="Degree" value="{{d.degree}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="uopl">Online profile link</label>
+                                                                <input type="text" name="online_profile_link"
+                                                                    class="form-control" id="uopl"
+                                                                    placeholder="Online Profile link"
+                                                                    value="{{d.online_profile_link}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="uyoe">Year of Experience</label>
+                                                                <input type="number" name="yoe" required
+                                                                    class="form-control" id="uyoe"
+                                                                    placeholder="Year of Experience" value="{{d.yoe}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="ulanguage">Language</label>
+                                                                <input type="text" name="language" required
+                                                                    class="form-control" id="ulanguage"
+                                                                    placeholder="Language" value="{{d.language}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="uavailabele">Available</label>
+                                                                <input type="number" name="available" required
+                                                                    class="form-control" id="uavailable"
+                                                                    placeholder="In Hours" value="{{d.available}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="ufees">Fees</label>
+                                                                <input type="number" name="fees" required
+                                                                    class="form-control" id="ufees" placeholder="Fees"
+                                                                    value="{{d.fees}}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer d-flex justify-content-center">
+                                                <button class="btn btn-success">Update</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Delete -->
+                            <a href="#deleteModal{{d.id}}" class="trigger-btn btn btn-danger btn-sm"
+                                data-toggle="modal">Delete</a>
+                            <!-- Delete Alart -->
+                            <div id="deleteModal{{d.id}}" class="modal fade">
+                                <div class="modal-dialog modal-confirm">
+                                    <div class="modal-content">
+                                        <div class="modal-header flex-column">
+                                            <!-- <div class="icon-box">
+                                                <i class="material-icons">&#xE5CD;</i>
+                                            </div> -->
+                                            <h4 class="modal-title w-100">Are you sure?</h4>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-hidden="true">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Do you really want to delete these records? This process cannot be
+                                                undone.</p>
+                                        </div>
+                                        <div class="modal-footer justify-content-center">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancel</button>
+                                            <a href="{% url 'delete' d.id %}" class="btn btn-danger">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- form -->
+
+
+    <div class="modal fade" id="drLogin" tabindex="-1" role="dialog" aria-labelledby="drForm" aria-hidden="true">
+        <form action="{% url 'add' %}" method="POST">
+            {% csrf_token %}
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">Add Doctor</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <div class="container py-2">
+
+                            <div class="row">
+                                <div class="col col-md-6 pr-5">
+                                    <h2 class="pb-3">Personal Detail</h2>
+                                    <div class="form-group">
+                                        <label for="name">Dr. Name</label>
+                                        <input type="text" name="name" required class="form-control" id="name"
+                                            placeholder="Dr. Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dob">Date Of Birth</label>
+                                        <input type="date" name="dob" required class="form-control" id="dob"
+                                            placeholder="Date of birth">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gender">Gender : </label>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" required
+                                                value="Male">
+                                            <label class="form-check-label" for="Male">Male</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" value="Female">
+                                            <label class="form-check-label" for="Female">Female</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Dr. Email</label>
+                                        <input type="email" name="email" required class="form-control" id="email"
+                                            placeholder="Dr. Email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mobile">Mobile Number</label>
+                                        <input type="tel" name="mobile" required class="form-control" id="mobile"
+                                            placeholder="Dr. Mobile Number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="state">State</label>
+                                        <input type="text" name="state" required class="form-control" id="state"
+                                            placeholder="State">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="city">City</label>
+                                        <input type="text" name="city" required class="form-control" id="city"
+                                            placeholder="City">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nationality">Nationality</label>
+                                        <input type="text" name="nationality" class="form-control" id="nationality"
+                                            placeholder="Nationality">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="zipcode">Zipcode</label>
+                                        <input type="number" name="zipcode" required class="form-control" id="zipcode"
+                                            placeholder="Zipcode">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bi">Bio:</label>
+                                        <textarea class="form-control" name="bio" rows="2" id="bio"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col col-md-6 pl-5">
+                                    <h2 class="pb-3">Working Detail</h2>
+                                    <div class="form-group">
+                                        <label for="imcid">IMC ID</label>
+                                        <input type="text" name="imcid" required class="form-control" id="imcid"
+                                            placeholder="IMC ID">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="reg">Reg. Number</label>
+                                        <input type="text" name="regno" required class="form-control" id="reg"
+                                            placeholder="Reg. Number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="specialization">Specializaton</label>
+                                        <select name="specialization" id="specialization" required class="form-control"
+                                            placeholder="Specializaton">
+                                            <option value="psychiatrists">Psychiatrists</option>
+                                            <option value="psychiatric nurses">Psychiatric Nurses</option>
+                                            <option value="counselors">Counselors</option>
+                                            <option value="therapist">Therapist</option>
+                                            <option value="psychologists">Psychologists</option>
+                                        </select>
+                                        <!-- <input type="text" name="specialization" required class="form-control"
+                                            id="specialization" placeholder="Specializaton"> -->
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="shift">Shift</label>
+                                        <input type="text" name="shift" class="form-control" id="shift"
+                                            placeholder="Shift">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="degree">Degree</label>
+                                        <input type="text" name="degree" required class="form-control" id="degree"
+                                            placeholder="Degree">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="opl">Online profile link</label>
+                                        <input type="text" name="online_profile_link" class="form-control" id="opl"
+                                            placeholder="Online Profile link">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="yoe">Year of Experience</label>
+                                        <input type="number" name="yoe" required class="form-control" id="yoe"
+                                            placeholder="Year of Experience">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="language">Language</label>
+                                        <input type="text" name="language" required class="form-control" id="language"
+                                            placeholder="Language">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="availabele">Available</label>
+                                        <input type="number" name="available" required class="form-control"
+                                            id="available" placeholder="In Hours">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fees">Fees</label>
+                                        <input type="number" name="fees" required class="form-control" id="fees"
+                                            placeholder="Fees">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button class="btn btn-success">Add</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock content %}
