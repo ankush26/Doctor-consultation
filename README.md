@@ -25,3 +25,12 @@ python manage.py runserver
 
 After the server starts it will provide you a address copy that and paste into your browser.
 
+## Screenshots
+
+![App Screenshot](https://github.com/ankush26/Doctor-consultation/blob/master/screenshot/1.png)
+![App Screenshot](https://github.com/ankush26/Doctor-consultation/blob/master/screenshot/2.png)
+![App Screenshot](https://github.com/ankush26/Doctor-consultation/blob/master/screenshot/3.png)
+![App Screenshot](https://github.com/ankush26/Doctor-consultation/blob/master/screenshot/4.png)
+![App Screenshot](https://github.com/ankush26/Doctor-consultation/blob/master/screenshot/5.png)
+![App Screenshot](https://github.com/ankush26/Doctor-consultation/blob/master/screenshot/6.png)
+![App Screenshot](https://github.com/ankush26/Doctor-consultation/blob/master/screenshot/7.png)
